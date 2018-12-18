@@ -1,0 +1,52 @@
+<header>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <%= link_to 'SekaiBook ', root_url, class: "navbar-brand" %>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="https://sekaibook.work/" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            サービス案内
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <%= link_to 'ご案内 ', about_path %>
+            <div class="dropdown-divider"></div>
+            <%= link_to '記事を紹介したい人', output_path %>
+            <%= link_to '記事を見つけたい人', input_path %>
+            <a class="dropdown-item" href="#">使い方</a>
+          </div>
+        </li>
+
+        <% if user_signed_in? %>
+          <li class="nav-item">
+            <%= link_to 'ログアウト ', destroy_user_session_path, method: :delete %>
+          </li>
+          <li class="nav-item">
+            <%= link_to '記事登録', book_add_path %>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">記事検索</a>
+          </li>
+          <li class="nav-item">
+            <%= link_to current_user.username, edit_user_registration_path %>
+          </li>
+          
+        <% else %>
+          <li class="nav-item">
+            <%= link_to 'ログイン ', new_user_session_path %>
+          </li>
+          <li class="nav-item">
+            <%= link_to '新規登録 ', new_user_registration_path %>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">記事検索</a>
+          </li>
+        <% end %>        
+
+      </ul>
+    </div>
+  </nav>
+</header>
