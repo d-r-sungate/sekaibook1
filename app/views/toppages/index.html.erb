@@ -1,0 +1,38 @@
+<div class="center jumbotron">
+  <div class="text-center">
+    <h1>Welcome to SekaiBook</h1>
+  </div>
+</div>
+
+  <section id="search">
+    <div class="search_ogp">
+      <div id="request_ajax_update" >
+        <%= form_tag("", method: :post, remote: true, class: "row") { %>
+          <%= text_field :data, :text ,:class => "col s9",:placeholder => "https://example.com" %>
+          <%= submit_tag '調べる' ,:class => "btn col s3 search_btn",:disabled => true %>
+        <% } %>
+      </div>
+  
+      <div id="example_ogp" class="service">
+        <div class="service_block">
+          <div class="card">
+            <div class="thumbnail card-image">
+              <img src="noimage.png" class="ogp_img">
+            </div>
+            <div class="card-content">
+              <p class="service_title card-title">SekaiBook</p>
+              <p class="description">metaDescriptionが表示されます。主にサービスの概要が書かれます。上にはサイトタイトル、ogp画像。下にはメタキーワード、favicon、ドメインが表示されます。</p>
+              <p class="domain">
+              <img src="noimage.png" class="favicon">
+              <a href="https://www.sekaibook.work/" target="_blank">www.sekaibook.work</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</section>
+
+  
+  
+  
