@@ -3,6 +3,10 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :omniauthable
+  validates :oganization,    length: { maximum: 200 }
+  validates :title,    length: { maximum: 200 }
+  validates :introduction,    length: { maximum: 2000 }
+  validates :country,    length: { maximum: 100 }
 
   def self.find_for_oauth(auth)
     user = User.where(uid: auth.uid, provider: auth.provider).first
@@ -21,7 +25,7 @@ class User < ApplicationRecord
         username: name
         )
     end
- 
+
     user
    end
 
