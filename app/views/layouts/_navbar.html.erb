@@ -31,7 +31,7 @@
             <a class="nav-link" href="#">記事検索</a>
           </li>
           <li class="nav-item">
-            <%= link_to current_user.username, edit_user_registration_path %>
+            <%= link_to current_user.username, user_path(current_user) %>
           </li>
           
         <% else %>
@@ -44,7 +44,7 @@
           <li class="nav-item">
             <a class="nav-link" href="#">記事検索</a>
           </li>
-        <% end %>        
+        <% end %>
 
       </ul>
     </div>

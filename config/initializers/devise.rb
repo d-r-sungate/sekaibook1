@@ -8,7 +8,7 @@ Devise.setup do |config|
   config.omniauth( :facebook,
                     ENV['FACEBOOK_APP_ID'],
                     ENV['FACEBOOK_APP_SECRET'],
-                    {:scope => 'email'} )
+                    {:scope => 'email', info_fields: 'email,name'} )
 
   # https://dev.twitter.com/docs/api/1.1
   config.omniauth :twitter, ENV['TWITTER_CONSUMER_KEY'], ENV['TWITTER_CONSUMER_SECRET']
