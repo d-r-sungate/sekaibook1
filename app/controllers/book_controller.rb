@@ -9,6 +9,7 @@ class BookController < ApplicationController
   end
 
   def add
+    @article = Article.new
   end
 
   def comment

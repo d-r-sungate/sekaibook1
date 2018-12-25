@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   get 'output', to: 'about#output'
   get 'input', to: 'about#input'
 
+
   get 'toppages/index'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
     root to: 'toppages#index'
@@ -24,4 +25,5 @@ Rails.application.routes.draw do
    post 'users/sign_up/complete' => 'users/registrations#complete'
   end
   resources :users, :only => [:index, :show, :edit, :update]
+  resources :articles, :only => [:index, :create]
 end
