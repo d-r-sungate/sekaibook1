@@ -12,6 +12,10 @@
   <% end %>
 
   <div class="field">
+    <%= f.label :表示名 %><br />
+    <%= f.text_field :username%>
+  </div>
+  <div class="field">
     <%= f.label :所属 %><br />
     <%= f.text_field :oganization%>
   </div>
@@ -27,6 +31,21 @@
     <%= f.label :居住国 %><br />
     <%= f.text_field :country %>
   </div>
+  <% if @user.provider == 'facebook' %>
+  <div class="field">
+    <%= f.label :Facebook連携 %><br />
+    <%= f.text_field :uid, readonly: true, disabled: true %><br/>
+    <%= f.check_box :auto_post_facebook %>
+
+  </div>
+  <% end %>
+  <% if @user.provider == 'twitter' %>
+  <div class="field">
+    <%= f.label :twitter連携 %><br />
+    <%= f.text_field :uid, readonly: true, disabled: true %><br/>
+    <%= f.check_box :auto_post_twitter %>
+    </div>
+  <% end %>
 
     <%= f.submit "Update" %>
   </div>

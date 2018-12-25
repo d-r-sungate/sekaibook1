@@ -21,7 +21,7 @@ class UsersController < ApplicationController
   end
 
   def user_params
-     params.require(:user).permit(:oganization, :title, :introduction, :country)
+     params.require(:user).permit(:username, :oganization, :title, :introduction, :country, :auto_post_facebook, :auto_post_twitter)
    end
   def set_user
     @user = User.find(params[:id])
