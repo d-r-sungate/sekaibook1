@@ -1,2 +1,12 @@
-<h1>Book#comment</h1>
-<p>Find me in app/views/book/comment.html.erb</p>
+<% provide(:title, @article.title) %>
+<% if flash[:notice] %>
+  <p><%= flash[:notice] %></p>
+<% end %>
+<p>タイトル: <%= @article.title %></p>
+<p>WebSite: <%= link_to @article.name, @article.url, {:target => "_blank"} %></p>
+<p>日付: <%= @article.date %></p>
+<p>記事本文: <%= @article.description %></p>
+<p>カテゴリー: <%= @article.category.description %></p>
+<p>エリア: <%= @article.area.description %></p>
+
+<%= render 'form_comment', book: @book %>

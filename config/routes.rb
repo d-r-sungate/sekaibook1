@@ -2,9 +2,15 @@ Rails.application.routes.draw do
 
   get 'book/show'
   get 'book/new'
-  get 'book/create'
   get 'book/add'
-  get 'book/comment'
+  
+  get '/book/:id/comment', to: 'book#comment' ,as: :book_comment
+  scope '/book' do
+    post '/:id/comment', to: 'book#create'
+    patch '/:id/comment', to: 'book#update'
+  
+  end
+
   
   get 'about' , to: 'about#show'
   get 'privacy', to: 'about#privacy'
