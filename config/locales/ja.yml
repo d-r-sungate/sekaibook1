@@ -129,3 +129,24 @@ ja:
         title: 役職
         introduction: 自己紹介
         country: 居住国
+  users:
+    username: 表示名
+    oganization: 所属
+    title: 役職
+    introduction: 自己紹介
+    country: 居住国
+    auto_post_facebook: Facebook連携
+    auto_post_twitter: twitter連携
+  books:
+    comment: コメント
+  articles:
+    url: 記事URL
+    area: 地域
+    category: カテゴリ
+    title: タイトル
+    name: WebSite
+    date: 日付
+    description: 記事本文
+
+    
+    

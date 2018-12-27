@@ -12,28 +12,28 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :表示名 %><br />
+    <%= f.label t('users.username') %><br />
     <%= f.text_field :username%>
   </div>
   <div class="field">
-    <%= f.label :所属 %><br />
+    <%= f.label t('users.oganization') %><br />
     <%= f.text_field :oganization%>
   </div>
   <div class="field">
-    <%= f.label :役職 %><br />
+    <%= f.label t('users.title') %><br />
     <%= f.text_field :title %>
   </div>
   <div class="field">
-    <%= f.label :自己紹介 %><br />
+    <%= f.label t('users.introduction') %><br />
     <%= f.text_area :introduction %>
   </div>
   <div class="field">
-    <%= f.label :居住国 %><br />
+    <%= f.label t('users.country') %><br />
     <%= f.text_field :country %>
   </div>
   <% if @user.provider == 'facebook' %>
   <div class="field">
-    <%= f.label :Facebook連携 %><br />
+    <%= f.label t('users.auto_post_facebook') %><br />
     <%= f.text_field :uid, readonly: true, disabled: true %><br/>
     <%= f.check_box :auto_post_facebook %>
 
@@ -41,7 +41,7 @@
   <% end %>
   <% if @user.provider == 'twitter' %>
   <div class="field">
-    <%= f.label :twitter連携 %><br />
+    <%= f.label  t('users.auto_post_twitter') %><br />
     <%= f.text_field :uid, readonly: true, disabled: true %><br/>
     <%= f.check_box :auto_post_twitter %>
     </div>

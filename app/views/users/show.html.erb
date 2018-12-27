@@ -1,7 +1,7 @@
 <% provide(:title, @user.username) %>
 <p><%= image_tag @user.image%></p>
-<p>名前: <%= @user.username %></p> <% if @user.id == current_user.id %><%= link_to '編集', edit_user_path(@user) %> <% end %>
-<p>所属: <%= @user.oganization %></p>
-<p>役職: <%= @user.title %></p>
-<p>自己紹介: <%= @user.introduction %></p>
-<p>居住国: <%= @user.country %></p>
+<p><%= t 'users.username' %>: <%= @user.username %></p> <% if @user.id == current_user.id %><%= link_to '編集', edit_user_path(@user) %> <% end %>
+<p><%= t 'users.oganization' %>: <%= @user.oganization %></p>
+<p><%= t 'users.title' %>: <%= @user.title %></p>
+<p><%= t 'users.introduction' %>: <%= @user.introduction %></p>
+<p><%= t 'users.country' %>: <%= @user.country %></p>
