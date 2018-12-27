@@ -1,6 +1,10 @@
 class BookController < ApplicationController
+  before_action :get_books, only: [:index]
   before_action :set_article, only: [:comment]
   before_action :set_or_create_book, only: [:comment, :create, :update]
+
+  def index
+  end
 
   def show
   end
@@ -32,6 +36,11 @@ class BookController < ApplicationController
   end
   
   private
+  def get_books
+    puts "#####"
+    @books = Book.where(user_id: current_user.id)
+    puts @books
+  end
     def set_article
       @article = Article.find_by!(id: params[:id])
     end

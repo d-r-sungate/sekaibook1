@@ -3,7 +3,8 @@ Rails.application.routes.draw do
   get 'book/show'
   get 'book/new'
   get 'book/add'
-  
+
+  get '/book', to: 'book#index' ,as: :book_index
   get '/book/:id/comment', to: 'book#comment' ,as: :book_comment
   scope '/book' do
     post '/:id/comment', to: 'book#create'
