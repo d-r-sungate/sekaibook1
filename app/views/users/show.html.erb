@@ -3,7 +3,7 @@
   <p><%= flash[:notice] %></p>
 <% end %>
 <p><%= image_tag @user.image%></p>
-<p><%= t 'users.username' %>: <%= @user.username %></p> <% if @user.id == current_user.id %><%= link_to '編集', edit_user_path(@user) %> <% end %>
+<p><%= t 'users.username' %>: <%= @user.username %></p> <% if current_user && @user.id == current_user.id %><%= link_to '編集', edit_user_path(@user) %> <% end %>
 <p><%= t 'users.oganization' %>: <%= @user.oganization %></p>
 <p><%= t 'users.title' %>: <%= @user.title %></p>
 <p><%= t 'users.introduction' %>: <%= @user.introduction %></p>
@@ -24,7 +24,7 @@
       <%= book.article.category.description %>
       <%= book.article.area.description %>
     <% end %>
-    <%= link_to t('books.bookbtn'), books_comment_path(book.article_id), class: 'btn btn-default' %>
+    <% if current_user %><%= link_to t('books.bookbtn'), books_comment_path(book.article_id), class: 'btn btn-default' %><% end %>
     </li>
   <% end %>
   </ul>
