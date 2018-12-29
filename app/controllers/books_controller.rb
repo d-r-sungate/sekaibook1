@@ -11,16 +11,64 @@ class BooksController < ApplicationController
   end
 
   def create
-   if @book.update(book_params)
-      redirect_to books_show_url(@book.article_id), notice: t('.success')
+    if @book.update(book_params)
+     flashmesg = t('.success')
+      if current_user.auto_post_facebook
+        set_article
+        begin
+          facebook_client.put_wall_post(book_params['comment'], {
+          "name" => @article.title,
+          "link" => @article.url,
+          "description" => @article.description,
+          "picture" => @article.ogpimg
+        })
+        rescue => e
+          logger.error(e)
+          flashmesg = t('.facebookerror')
+        end
+      end
+      if current_user.auto_post_twitter
+        set_article
+        begin
+          twitter_client.update(book_params['comment'].slice(0, Settings.books.tweetlimit))
+        rescue => e
+          logger.error(e)
+          flashmesg = t('.tweeterror')
+        end
+      end
+      redirect_to books_show_url(@book.article_id), notice: flashmesg
     else
       redirect_to books_comment_url(@book.article_id), notice: t('.error')
     end
   end
 
   def update
-   if @book.update(book_params)
-      redirect_to books_show_url(@book.article_id), notice: t('.success')
+    if @book.update(book_params)
+      flashmesg = t('.success')
+      if current_user.auto_post_facebook
+        set_article
+        begin
+          facebook_client.put_wall_post(book_params['comment'], {
+          "name" => @article.title,
+          "link" => @article.url,
+          "description" => @article.description,
+          "picture" => @article.ogpimg
+        })
+        rescue => e
+          logger.error(e)
+          flashmesg = t('.facebookerror')
+        end
+      end
+      if current_user.auto_post_twitter
+        set_article
+        begin
+          twitter_client.update(book_params['comment'].slice(0, Settings.books.tweetlimit))
+        rescue => e
+          logger.error(e)
+          flashmesg = t('.tweeterror')
+        end
+      end
+      redirect_to books_show_url(@book.article_id), notice: flashmesg
     else
       redirect_to books_comment_url(@book.article_id), notice: t('.error')
     end
@@ -52,4 +100,21 @@ class BooksController < ApplicationController
     def book_params
       params.require(:book).permit(:comment)
     end
+    def twitter_client
+      Twitter::REST::Client.new do |config|
+        config.consumer_key        = ENV['TWITTER_CONSUMER_KEY']
+        config.consumer_secret     = ENV['TWITTER_CONSUMER_SECRET']
+        config.access_token        = session[:oauth_token]
+        config.access_token_secret = session[:oauth_token_secret]
+      end
+    end
+  def facebook_client
+    Koala.configure do |config|
+      config.access_token = session[:oauth_token]
+      config.app_access_token = session[:oauth_token_secret]
+      config.app_id = ENV['FACEBOOK_APP_ID']
+      config.app_secret = ENV['FACEBOOK_APP_SECRET']
+    end
+    Koala::Facebook::API.new(session[:oauth_token])
+  end
 end
