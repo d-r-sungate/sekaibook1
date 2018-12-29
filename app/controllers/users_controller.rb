@@ -2,6 +2,7 @@
 class UsersController < ApplicationController
    before_action :set_user, only: [:show, :edit, :update]
    before_action :set_current_user
+   before_action :get_books, only: [:show]
   def index
     @users = User.all
   end
@@ -26,5 +27,8 @@ class UsersController < ApplicationController
    end
   def set_user
     @user = User.find(params[:id])
+  end
+  def get_books
+    @books = Book.where(user_id: params[:id]).page(params[:page]).per(Settings.users.books.pagerow)
   end
 end

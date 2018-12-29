@@ -1,6 +1,7 @@
 class BooksController < ApplicationController
-  before_action :get_books, only: [:index]
-  before_action :set_article, only: [:comment]
+  before_action :get_allarticles, only: [:index]
+  before_action :set_article, only: [:comment, :show]
+  before_action :get_articlebooks, only: [:show]
   before_action :set_or_create_book, only: [:comment, :create, :update]
 
   def index
@@ -14,7 +15,7 @@ class BooksController < ApplicationController
 
   def create
    if @book.update(book_params)
-      redirect_to books_comment_url(@book.article_id), notice: t('.success')
+      redirect_to books_show_url(@book.article_id), notice: t('.success')
     else
       redirect_to books_comment_url(@book.article_id), notice: t('.error')
     end
@@ -22,7 +23,7 @@ class BooksController < ApplicationController
 
   def update
    if @book.update(book_params)
-      redirect_to books_comment_url(@book.article_id), notice: t('.success')
+      redirect_to books_show_url(@book.article_id), notice: t('.success')
     else
       redirect_to books_comment_url(@book.article_id), notice: t('.error')
     end
@@ -36,10 +37,9 @@ class BooksController < ApplicationController
   end
   
   private
-  def get_books
-    @books = Book.where(user_id: current_user.id)
-    puts @books
-  end
+    def get_allarticles
+      @articles = Article.page(params[:page]).per(Settings.books.pagerow)
+    end
     def set_article
       @article = Article.find_by!(id: params[:id])
     end
@@ -48,6 +48,9 @@ class BooksController < ApplicationController
       if @book.new_record?
         @book.comment = ""
       end
+    end
+    def get_articlebooks
+      @articlebooks = Book.where(article_id: params[:id])
     end
     def book_params
       params.require(:book).permit(:comment)

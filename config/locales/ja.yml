@@ -142,6 +142,7 @@ ja:
       success: 更新しました。
   books:
     comment: コメント
+    bookbtn: Book
     create:
       success: 追加しました。
       error: 追加できませんでした。

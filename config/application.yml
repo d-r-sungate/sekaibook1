@@ -1,0 +1,12 @@
+defaults: &defaults
+  books:
+    pagerow: 2
+  users:
+    books:
+      pagerow: 2
+development:
+  <<: *defaults
+test:
+  <<: *defaults
+production:
+  <<: *defaults
