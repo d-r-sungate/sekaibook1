@@ -21,6 +21,7 @@
 
 ja:
   hello: "Hello world"
+  errorexistsmsg: 入力内容に誤りがあります。
   errors:
     format: "%{attribute}%{message}"
     messages:
@@ -137,8 +138,16 @@ ja:
     country: 居住国
     auto_post_facebook: Facebook連携
     auto_post_twitter: twitter連携
-  books:
+    update:
+      success: 更新しました。
+  book:
     comment: コメント
+    create:
+      success: 追加しました。
+      error: 追加できませんでした。
+    update:
+      success: 更新しました。
+      error: 更新できませんでした。
   articles:
     url: 記事URL
     area: 地域
@@ -147,6 +156,18 @@ ja:
     name: WebSite
     date: 日付
     description: 記事本文
+    create:
+      success: 追加しました。
+      adderror: 追加できませんでした。
+      geterror: 取得できませんでした。
+  title:
+    book:
+      index: 記事一覧
+      comment: 記事へのコメント登録
+      add:  記事登録
+    users:
+      show: ユーザー情報
+      edit: ユーザー編集
 
     
     

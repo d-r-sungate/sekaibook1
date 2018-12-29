@@ -1,4 +1,7 @@
-<% provide(:title, @user.username) %>
+<h2><%= page_title %></h2>
+<% if flash[:notice] %>
+  <p><%= flash[:notice] %></p>
+<% end %>
 <p><%= image_tag @user.image%></p>
 <p><%= t 'users.username' %>: <%= @user.username %></p> <% if @user.id == current_user.id %><%= link_to '編集', edit_user_path(@user) %> <% end %>
 <p><%= t 'users.oganization' %>: <%= @user.oganization %></p>

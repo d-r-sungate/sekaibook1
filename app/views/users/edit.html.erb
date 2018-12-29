@@ -1,8 +1,8 @@
-
+<h2><%= page_title %></h2>
 <%= form_for @user do |f| %>
   <% if @user.errors.any? %>
     <div class="alert alert-danger">
-      <h4>入力内容に誤りがあります。</h4>
+      <h4><%= t('errorexistsmsg') %></h4>
       <ul class="list-unstyled">
       <% @user.errors.full_messages.each do |message| %>
         <li><%= message %></li>

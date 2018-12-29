@@ -1,4 +1,4 @@
-<h1>登録記事一覧</h1>
+<h2><%= page_title %></h2>
 <ul>
 
 <% if !@books.nil? %>
@@ -7,7 +7,8 @@
 <%= book.article.title %>
 <% if !book.article.ogpimg.nil? %>
   <%= image_tag(book.article.ogpimg) %>
-  <% end %>
+<% else %>
+<% end %>
 <br/>
 <%= book.article.name %>
 <%= book.article.date %><br/>

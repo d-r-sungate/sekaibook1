@@ -14,17 +14,17 @@ class BookController < ApplicationController
 
   def create
    if @book.update(book_params)
-      redirect_to book_comment_url(@book.article_id), notice: '追加しました。'
+      redirect_to book_comment_url(@book.article_id), notice: t('.success')
     else
-      redirect_to book_comment_url(@book.article_id), notice: '追加できませんでした。'
+      redirect_to book_comment_url(@book.article_id), notice: t('.error')
     end
   end
 
   def update
    if @book.update(book_params)
-      redirect_to book_comment_url(@book.article_id), notice: '更新しました。'
+      redirect_to book_comment_url(@book.article_id), notice: t('.success')
     else
-      redirect_to book_comment_url(@book.article_id), notice: '更新できませんでした。'
+      redirect_to book_comment_url(@book.article_id), notice: t('.error')
     end
   end
 
