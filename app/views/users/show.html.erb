@@ -7,7 +7,7 @@
 <p><%= t 'users.oganization' %>: <%= @user.oganization %></p>
 <p><%= t 'users.title' %>: <%= @user.title %></p>
 <p><%= t 'users.introduction' %>: <%= @user.introduction %></p>
-<p><%= t 'users.country' %>: <%= ISO3166::Country[@user.country].translations[I18n.locale.to_s] %></p>
+<p><%= t 'users.country' %>: <%= country_name(@user.country) %></p>
 <% if !@books.nil? %>
   <ul>
   <%  @books.each do |book| %>
