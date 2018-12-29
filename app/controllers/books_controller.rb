@@ -10,9 +10,6 @@ class BooksController < ApplicationController
   def show
   end
 
-  def new
-  end
-
   def create
    if @book.update(book_params)
       redirect_to books_show_url(@book.article_id), notice: t('.success')
