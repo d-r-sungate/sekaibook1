@@ -1,9 +1,9 @@
 defaults: &defaults
   books:
-    pagerow: 2
+    pagerow: 20
   users:
     books:
-      pagerow: 2
+      pagerow: 20
 development:
   <<: *defaults
 test:
