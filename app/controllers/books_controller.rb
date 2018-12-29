@@ -1,4 +1,4 @@
-class BookController < ApplicationController
+class BooksController < ApplicationController
   before_action :get_books, only: [:index]
   before_action :set_article, only: [:comment]
   before_action :set_or_create_book, only: [:comment, :create, :update]
@@ -14,17 +14,17 @@ class BookController < ApplicationController
 
   def create
    if @book.update(book_params)
-      redirect_to book_comment_url(@book.article_id), notice: t('.success')
+      redirect_to books_comment_url(@book.article_id), notice: t('.success')
     else
-      redirect_to book_comment_url(@book.article_id), notice: t('.error')
+      redirect_to books_comment_url(@book.article_id), notice: t('.error')
     end
   end
 
   def update
    if @book.update(book_params)
-      redirect_to book_comment_url(@book.article_id), notice: t('.success')
+      redirect_to books_comment_url(@book.article_id), notice: t('.success')
     else
-      redirect_to book_comment_url(@book.article_id), notice: t('.error')
+      redirect_to books_comment_url(@book.article_id), notice: t('.error')
     end
   end
 
@@ -37,7 +37,6 @@ class BookController < ApplicationController
   
   private
   def get_books
-    puts "#####"
     @books = Book.where(user_id: current_user.id)
     puts @books
   end

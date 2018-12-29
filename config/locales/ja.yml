@@ -140,7 +140,7 @@ ja:
     auto_post_twitter: twitter連携
     update:
       success: 更新しました。
-  book:
+  books:
     comment: コメント
     create:
       success: 追加しました。
@@ -161,7 +161,7 @@ ja:
       adderror: 追加できませんでした。
       geterror: 取得できませんでした。
   title:
-    book:
+    books:
       index: 記事一覧
       comment: 記事へのコメント登録
       add:  記事登録

@@ -1,14 +1,14 @@
 Rails.application.routes.draw do
 
-  get 'book/show'
-  get 'book/new'
-  get 'book/add'
+  get 'books/show'
+  get 'books/new'
+  get 'books/add'
 
-  get '/book', to: 'book#index' ,as: :book_index
-  get '/book/:id/comment', to: 'book#comment' ,as: :book_comment
-  scope '/book' do
-    post '/:id/comment', to: 'book#create'
-    patch '/:id/comment', to: 'book#update'
+  get '/books', to: 'books#index' ,as: :books_index
+  get '/books/:id/comment', to: 'books#comment' ,as: :books_comment
+  scope '/books' do
+    post '/:id/comment', to: 'books#create'
+    patch '/:id/comment', to: 'books#update'
   
   end
 
