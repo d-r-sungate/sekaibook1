@@ -1,0 +1,7 @@
+<%= form_for(@book, url: books_comment_url(@book.article_id)) do |f| %>
+  <div class="field">
+    <%= f.label t('books.comment') %><br />
+    <%= f.text_area :comment %>
+  </div>
+  <%= f.submit t('books.bookbtn') %>
+<% end %>

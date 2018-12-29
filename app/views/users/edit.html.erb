@@ -1,8 +1,8 @@
-
+<h2><%= page_title %></h2>
 <%= form_for @user do |f| %>
   <% if @user.errors.any? %>
     <div class="alert alert-danger">
-      <h4>入力内容に誤りがあります。</h4>
+      <h4><%= t('errorexistsmsg') %></h4>
       <ul class="list-unstyled">
       <% @user.errors.full_messages.each do |message| %>
         <li><%= message %></li>
@@ -12,21 +12,40 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :所属 %><br />
+    <%= f.label t('users.username') %><br />
+    <%= f.text_field :username%>
+  </div>
+  <div class="field">
+    <%= f.label t('users.oganization') %><br />
     <%= f.text_field :oganization%>
   </div>
   <div class="field">
-    <%= f.label :役職 %><br />
+    <%= f.label t('users.title') %><br />
     <%= f.text_field :title %>
   </div>
   <div class="field">
-    <%= f.label :自己紹介 %><br />
+    <%= f.label t('users.introduction') %><br />
     <%= f.text_area :introduction %>
   </div>
   <div class="field">
-    <%= f.label :居住国 %><br />
+    <%= f.label t('users.country') %><br />
     <%= f.text_field :country %>
   </div>
+  <% if @user.provider == 'facebook' %>
+  <div class="field">
+    <%= f.label t('users.auto_post_facebook') %><br />
+    <%= f.text_field :uid, readonly: true, disabled: true %><br/>
+    <%= f.check_box :auto_post_facebook %>
+
+  </div>
+  <% end %>
+  <% if @user.provider == 'twitter' %>
+  <div class="field">
+    <%= f.label  t('users.auto_post_twitter') %><br />
+    <%= f.text_field :uid, readonly: true, disabled: true %><br/>
+    <%= f.check_box :auto_post_twitter %>
+    </div>
+  <% end %>
 
     <%= f.submit "Update" %>
   </div>

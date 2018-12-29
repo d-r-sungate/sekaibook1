@@ -1,7 +1,33 @@
-<% provide(:title, @user.username) %>
+<h2><%= page_title %></h2>
+<% if flash[:notice] %>
+  <p><%= flash[:notice] %></p>
+<% end %>
 <p><%= image_tag @user.image%></p>
-<p>名前 <%= @user.username %></p> <% if @user.id == current_user.id %><%= link_to '編集', edit_user_path(@user) %> <% end %>
-<p>所属 <%= @user.oganization %></p>
-<p>役職 <%= @user.title %></p>
-<p>自己紹介 <%= @user.introduction %></p>
-<p>居住国 <%= @user.country %></p>
+<p><%= t 'users.username' %>: <%= @user.username %></p> <% if @user.id == current_user.id %><%= link_to '編集', edit_user_path(@user) %> <% end %>
+<p><%= t 'users.oganization' %>: <%= @user.oganization %></p>
+<p><%= t 'users.title' %>: <%= @user.title %></p>
+<p><%= t 'users.introduction' %>: <%= @user.introduction %></p>
+<p><%= t 'users.country' %>: <%= @user.country %></p>
+<% if !@books.nil? %>
+  <ul>
+  <%  @books.each do |book| %>
+  <li>
+    <%= link_to(books_show_path(book.article_id)) do %>
+      <%= book.article.title %>
+      <% if !book.article.ogpimg.nil? %>
+        <%= image_tag(book.article.ogpimg) %>
+      <% else %>
+      <% end %>
+      <br/>
+      <%= book.article.name %>
+      <%= book.article.date %><br/>
+      <%= book.article.category.description %>
+      <%= book.article.area.description %>
+    <% end %>
+    <%= link_to t('books.bookbtn'), books_comment_path(book.article_id), class: 'btn btn-default' %>
+    </li>
+  <% end %>
+  </ul>
+  <%= paginate @books %>
+<% end %>
+

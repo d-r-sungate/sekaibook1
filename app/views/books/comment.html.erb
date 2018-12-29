@@ -1,0 +1,12 @@
+<h2><%= page_title %></h2>
+<% if flash[:notice] %>
+  <p><%= flash[:notice] %></p>
+<% end %>
+<p><%= t 'articles.title' %>: <%= @article.title %></p>
+<p><%= t 'articles.name' %>: <%= link_to @article.name, @article.url, {:target => "_blank"} %></p>
+<p><%= t 'articles.date' %>: <%= @article.date %></p>
+<p><%= t 'articles.description' %>: <%= @article.description %></p>
+<p><%= t 'articles.category' %>: <%= @article.category.description %></p>
+<p><%= t 'articles.area' %>: <%= @article.area.description %></p>
+
+<%= render 'form_comment', book: @book %>

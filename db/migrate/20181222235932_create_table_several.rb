@@ -20,6 +20,7 @@ class CreateTableSeveral < ActiveRecord::Migration[5.2]
       t.bigint :user_id,              null: false
       t.timestamps null: false
     end
+    add_index :articles, :url,                unique: true
     add_index :articles, :category_id,                unique: false
     add_index :articles, :area_id,                unique: false
 
