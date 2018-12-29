@@ -146,9 +146,11 @@ ja:
     create:
       success: 追加しました。
       error: 追加できませんでした。
+      tweeterror: Twitterへの投稿でエラーがありました。
     update:
       success: 更新しました。
       error: 更新できませんでした。
+      tweeterror: Twitterへの投稿でエラーがありました。
   articles:
     url: 記事URL
     area: 地域

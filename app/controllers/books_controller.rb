@@ -11,16 +11,39 @@ class BooksController < ApplicationController
   end
 
   def create
-   if @book.update(book_params)
-      redirect_to books_show_url(@book.article_id), notice: t('.success')
+    if @book.update(book_params)
+     flashmesg = t('.success')
+      if current_user.auto_post_facebook
+       
+      end
+      begin
+        twitter_client.update(book_params['comment'].slice(0, Settings.books.tweetlimit))
+      rescue => e
+        logger.error(e)
+        flashmesg = t('.tweeterror')
+      end
+      redirect_to books_show_url(@book.article_id), notice: flashmesg
     else
       redirect_to books_comment_url(@book.article_id), notice: t('.error')
     end
   end
 
   def update
-   if @book.update(book_params)
-      redirect_to books_show_url(@book.article_id), notice: t('.success')
+   
+    if @book.update(book_params)
+      flashmesg = t('.success')
+      if current_user.auto_post_facebook
+       
+      end
+      if current_user.auto_post_twitter
+        begin
+          twitter_client.update(book_params['comment'].slice(0, Settings.books.tweetlimit))
+        rescue => e
+          logger.error(e)
+          flashmesg = t('.tweeterror')
+        end
+      end
+      redirect_to books_show_url(@book.article_id), notice: flashmesg
     else
       redirect_to books_comment_url(@book.article_id), notice: t('.error')
     end
@@ -51,5 +74,13 @@ class BooksController < ApplicationController
     end
     def book_params
       params.require(:book).permit(:comment)
+    end
+    def twitter_client
+      client = Twitter::REST::Client.new do |config|
+        config.consumer_key        = ENV['TWITTER_CONSUMER_KEY']
+        config.consumer_secret     = ENV['TWITTER_CONSUMER_SECRET']
+        config.access_token        = session[:oauth_token]
+        config.access_token_secret = session[:oauth_token_secret]
+      end
     end
 end

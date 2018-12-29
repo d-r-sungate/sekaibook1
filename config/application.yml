@@ -1,6 +1,7 @@
 defaults: &defaults
   books:
     pagerow: 20
+    tweetlimit: 140
   users:
     books:
       pagerow: 20

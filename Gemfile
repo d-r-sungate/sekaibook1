@@ -59,6 +59,8 @@ gem 'devise'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-twitter'
+gem 'twitter'
+
 
 # Debugger
 gem 'pry-byebug', group: :development
