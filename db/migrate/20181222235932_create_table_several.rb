@@ -29,13 +29,6 @@ class CreateTableSeveral < ActiveRecord::Migration[5.2]
       t.timestamps null: false
     end
 
-    create_table :likes do |t|
-      t.bigint :user_id,              null: false
-      t.text :comment, :limit => 4294967295, null: true, default: ""
-      t.timestamps null: false
-    end
-    add_index :likes, :user_id,                unique: false
-
     create_table :books do |t|
       t.bigint :user_id,              null: false
       t.bigint :article_id,              null: false

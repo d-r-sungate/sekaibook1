@@ -12,7 +12,7 @@
 <% if !@articlebooks.nil? %>
 <ul>
   <%  @articlebooks.each do |articlebook| %>
-    <li>
+    <li id="like-<%= articlebook.id %>" data-like-id="<%= articlebook.id %>">
     <%= link_to(user_path(articlebook.user.id)) do %>
       <%= image_tag articlebook.user.image%>
       <p><%= articlebook.user.username %></p>
@@ -20,6 +20,7 @@
     <p><%= articlebook.user.oganization %></p>
     <p><%= articlebook.user.title %></p>
     <p><%= simple_format(articlebook.comment) %></p>
+    <% if user_signed_in? %><span class="like"><%= render "likes/like", book: articlebook %></span><% end %>
     </li>
   <% end %>
 </ul>

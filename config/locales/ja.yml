@@ -161,6 +161,7 @@ ja:
     name: WebSite
     date: 日付
     description: 記事本文
+    like: Like
     create:
       success: 追加しました。
       adderror: 追加できませんでした。

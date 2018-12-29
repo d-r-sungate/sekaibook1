@@ -1,0 +1,22 @@
+<% if user_signed_in? %>
+  <% if book.like?(current_user) %>
+    <%= button_to like_path(book.like.find_by(user_id: current_user.id)), method: :delete, remote: true do %>
+      <%= content_tag :span, t('articles.like'), class: "glyphicon glyphicon-heart" %>
+      <span>
+      <%= book.likes_count %>
+      </span>
+    <% end %>
+  <% else %>
+    <%= button_to likes_path(book_id: book.id), remote: true do %>
+      <%= content_tag :span, t('articles.like'), class: "glyphicon glyphicon-heart-empty" %>
+      <span>
+      <%= book.likes_count %>
+      </span>
+    <% end %>
+  <% end %>
+<% else %>
+  <%= content_tag :span, t('articles.like'), class: "glyphicon glyphicon-heart" %>
+  <span>
+  <%= book.likes_count %>
+  </span>
+<% end %>

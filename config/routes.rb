@@ -31,4 +31,5 @@ Rails.application.routes.draw do
   end
   resources :users, :only => [:index, :show, :edit, :update]
   resources :articles, :only => [:index, :create]
+  resources :likes, :only => [:create, :destroy]
 end
