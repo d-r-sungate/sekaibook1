@@ -8,6 +8,7 @@
 <p><%= t 'users.title' %>: <%= @user.title %></p>
 <p><%= t 'users.introduction' %>: <%= @user.introduction %></p>
 <p><%= t 'users.country' %>: <%= country_name(@user.country) %></p>
+<p><%= t 'users.booklikes' %>: <%= @booklikescount %></p>
 <% if !@books.nil? %>
   <ul>
   <%  @books.each do |book| %>
