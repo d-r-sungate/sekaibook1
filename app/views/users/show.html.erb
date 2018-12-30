@@ -2,7 +2,7 @@
 <% if flash[:notice] %>
   <p><%= flash[:notice] %></p>
 <% end %>
-<p><%= image_tag @user.image %></p>
+<p><%= image_tag @user.image.sub(/(http:|https:)/, '') %></p>
 <p><%= t 'users.username' %>: <%= @user.username %></p> <% if current_user && @user.id == current_user.id %><%= link_to '編集', edit_user_path(@user) %> <% end %>
 <p><%= t 'users.oganization' %>: <%= @user.oganization %></p>
 <p><%= t 'users.title' %>: <%= @user.title %></p>
@@ -15,7 +15,7 @@
     <%= link_to(books_show_path(book.article_id)) do %>
       <%= book.article.title %>
       <% if !book.article.ogpimg.nil? %>
-        <%= image_tag(book.article.ogpimg) %>
+        <%= image_tag(book.article.ogpimg.sub(/(http:|https:)/, '')) %>
       <% else %>
       <% end %>
       <br/>

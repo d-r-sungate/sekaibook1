@@ -6,7 +6,7 @@
     <%= link_to(books_show_path(article.id)) do %>
       <%= article.title %>
       <% if !article.ogpimg.nil? %>
-        <%= image_tag(article.ogpimg) %>
+        <%= image_tag(article.ogpimg.sub(/(http:|https:)/, '')) %>
       <% else %>
       <% end %>
       <br/>

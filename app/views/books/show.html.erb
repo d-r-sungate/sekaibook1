@@ -14,7 +14,7 @@
   <%  @articlebooks.each do |articlebook| %>
     <li>
     <%= link_to(user_path(articlebook.user.id)) do %>
-      <%= image_tag articlebook.user.image%>
+      <%= image_tag articlebook.user.image.sub(/(http:|https:)/, '') %>
       <p><%= articlebook.user.username %></p>
     <% end %>
     <p><%= articlebook.user.oganization %></p>
