@@ -2,12 +2,13 @@
 <% if flash[:notice] %>
   <p><%= flash[:notice] %></p>
 <% end %>
-<p><%= image_tag @user.image%></p>
-<p><%= t 'users.username' %>: <%= @user.username %></p> <% if @user.id == current_user.id %><%= link_to '編集', edit_user_path(@user) %> <% end %>
+<p><%= image_tag @user.image.sub(/(http:|https:)/, '') %></p>
+<p><%= t 'users.username' %>: <%= @user.username %></p> <% if current_user && @user.id == current_user.id %><%= link_to '編集', edit_user_path(@user) %> <% end %>
 <p><%= t 'users.oganization' %>: <%= @user.oganization %></p>
 <p><%= t 'users.title' %>: <%= @user.title %></p>
 <p><%= t 'users.introduction' %>: <%= @user.introduction %></p>
-<p><%= t 'users.country' %>: <%= @user.country %></p>
+<p><%= t 'users.country' %>: <%= country_name(@user.country) %></p>
+<p><%= t 'users.booklikes' %>: <%= @booklikescount %></p>
 <% if !@books.nil? %>
   <ul>
   <%  @books.each do |book| %>
@@ -15,7 +16,7 @@
     <%= link_to(books_show_path(book.article_id)) do %>
       <%= book.article.title %>
       <% if !book.article.ogpimg.nil? %>
-        <%= image_tag(book.article.ogpimg) %>
+        <%= image_tag(book.article.ogpimg.sub(/(http:|https:)/, '')) %>
       <% else %>
       <% end %>
       <br/>
@@ -24,7 +25,7 @@
       <%= book.article.category.description %>
       <%= book.article.area.description %>
     <% end %>
-    <%= link_to t('books.bookbtn'), books_comment_path(book.article_id), class: 'btn btn-default' %>
+    <% if current_user %><%= link_to t('books.bookbtn'), books_comment_path(book.article_id), class: 'btn btn-default' %><% end %>
     </li>
   <% end %>
   </ul>

@@ -136,6 +136,7 @@ ja:
     title: 役職
     introduction: 自己紹介
     country: 居住国
+    booklikes: いいね
     auto_post_facebook: Facebook連携
     auto_post_twitter: twitter連携
     update:
@@ -161,6 +162,7 @@ ja:
     name: WebSite
     date: 日付
     description: 記事本文
+    like: Like
     create:
       success: 追加しました。
       adderror: 追加できませんでした。

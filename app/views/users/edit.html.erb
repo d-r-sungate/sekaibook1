@@ -29,7 +29,7 @@
   </div>
   <div class="field">
     <%= f.label t('users.country') %><br />
-    <%= f.text_field :country %>
+    <%= f.country_select :country, priority_countries: ["JP", "US"], priority_countries_divider: "----------" %>
   </div>
   <% if @user.provider == 'facebook' %>
   <div class="field">

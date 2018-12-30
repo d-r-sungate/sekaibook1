@@ -1,4 +1,5 @@
 class BooksController < ApplicationController
+  before_action :authenticate_user!, only: [:comment, :create, :update]
   before_action :get_allarticles, only: [:index]
   before_action :set_article, only: [:comment, :show]
   before_action :get_articlebooks, only: [:show]
@@ -108,13 +109,13 @@ class BooksController < ApplicationController
         config.access_token_secret = session[:oauth_token_secret]
       end
     end
-  def facebook_client
-    Koala.configure do |config|
-      config.access_token = session[:oauth_token]
-      config.app_access_token = session[:oauth_token_secret]
-      config.app_id = ENV['FACEBOOK_APP_ID']
-      config.app_secret = ENV['FACEBOOK_APP_SECRET']
+    def facebook_client
+      Koala.configure do |config|
+        config.access_token = session[:oauth_token]
+        config.app_access_token = session[:oauth_token_secret]
+        config.app_id = ENV['FACEBOOK_APP_ID']
+        config.app_secret = ENV['FACEBOOK_APP_SECRET']
+      end
+      Koala::Facebook::API.new(session[:oauth_token])
     end
-    Koala::Facebook::API.new(session[:oauth_token])
-  end
 end

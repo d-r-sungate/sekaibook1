@@ -7,6 +7,8 @@ class User < ApplicationRecord
   validates :title,    length: { maximum: 200 }
   validates :introduction,    length: { maximum: 2000 }
   validates :country,    length: { maximum: 100 }
+    
+  has_many :like, dependent: :destroy
 
   def self.find_for_oauth(auth)
     user = User.where(uid: auth.uid, provider: auth.provider).first
