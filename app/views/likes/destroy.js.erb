@@ -1,1 +1,1 @@
-$("#like-<%= @book.id.to_s %>.like").html("<%= j(render partial: 'like', locals: {book: @book}) %>")
+document.getElementById("like-<%= @book.id.to_s %>").innerHTML="<%= j(render partial: 'like', locals: {book: @book}) %>";
