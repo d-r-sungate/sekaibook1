@@ -35,6 +35,8 @@ class UsersController < ApplicationController
   end
   def set_booklikescount
     booklikes = Book.select('sum(likes_count) as sum').where(user_id: params[:id]).group(:user_id)
-    @booklikescount = booklikes[0].sum
+    if booklikes != nil && booklikes.length > 0 && booklikes[0] != nil
+      @booklikescount = booklikes[0].sum
+    end
   end
 end
