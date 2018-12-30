@@ -6,7 +6,7 @@ class CreateTableSeveral < ActiveRecord::Migration[5.2]
     end
 
     create_table :articles do |t|
-      t.string :url,              null: false, default: ""
+      t.string :url,              null: false, limit: 191, default: ""
       t.string :title,              null: true, default: ""
       t.string :domain,              null: true, default: ""
       t.string :description,              null: true, default: ""
@@ -32,7 +32,7 @@ class CreateTableSeveral < ActiveRecord::Migration[5.2]
     create_table :books do |t|
       t.bigint :user_id,              null: false
       t.bigint :article_id,              null: false
-      t.text :comment, :limit => 4294967295, null: true, default: ""
+      t.text :comment, :limit => 4294967295, null: true
       t.timestamps null: false
     end
     add_index :books, [:user_id,:article_id] ,              unique: false
