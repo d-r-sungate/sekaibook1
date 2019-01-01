@@ -83,39 +83,63 @@ class BooksController < ApplicationController
   end
   
   private
-    def get_allarticles
-      @articles = Article.page(params[:page]).per(Settings.books.pagerow)
+  def get_allarticles
+    @articles = Article.page(params[:page]).per(Settings.books.pagerow)
+  end
+  def set_article
+    @article = Article.find_by!(id: params[:id])
+  end
+  def set_or_create_book
+    @book = Book.find_or_initialize_by(user_id: current_user.id, article_id: params[:id])
+    if @book.new_record?
+      @book.comment = ""
     end
-    def set_article
-      @article = Article.find_by!(id: params[:id])
-    end
-    def set_or_create_book
-      @book = Book.find_or_initialize_by(user_id: current_user.id, article_id: params[:id])
-      if @book.new_record?
-        @book.comment = ""
+  end
+  def get_articlebooks
+    @articlebooks = Book.where(article_id: params[:id]).joins(:user)
+  end
+  def book_params
+    params.require(:book).permit(:comment)
+  end
+  def twitter_client
+    access_token        = session[:oauth_token]
+    access_token_secret = session[:oauth_token_secret]
+    if current_user.provider != 'twitter'
+      if session[:other_oauth_token] == nil || session[:other_oauth_token]['twitter'] == nil
+        set_social_profile_token('twitter')
       end
+      access_token        = session[:other_oauth_token]['twitter']
+      access_token_secret = session[:other_oauth_token_secret]['twitter']
     end
-    def get_articlebooks
-      @articlebooks = Book.where(article_id: params[:id]).joins(:user)
+    puts "######10####"
+    puts access_token
+    puts access_token_secret
+    Twitter::REST::Client.new do |config|
+      config.consumer_key        = ENV['TWITTER_CONSUMER_KEY']
+      config.consumer_secret     = ENV['TWITTER_CONSUMER_SECRET']
+      config.access_token        = access_token
+      config.access_token_secret = access_token_secret
     end
-    def book_params
-      params.require(:book).permit(:comment)
+  end
+  def facebook_client
+    access_token        = session[:oauth_token]
+    access_token_secret = session[:oauth_token_secret]
+    if current_user.provider != 'twitter'
+      access_token        = session[:other_oauth_token]['facebook']
+      access_token_secret = session[:other_oauth_token_secret]['facebook']
     end
-    def twitter_client
-      Twitter::REST::Client.new do |config|
-        config.consumer_key        = ENV['TWITTER_CONSUMER_KEY']
-        config.consumer_secret     = ENV['TWITTER_CONSUMER_SECRET']
-        config.access_token        = session[:oauth_token]
-        config.access_token_secret = session[:oauth_token_secret]
-      end
+   Koala.configure do |config|
+      config.access_token = access_token
+      config.app_access_token = access_token_secret
+      config.app_id = ENV['FACEBOOK_APP_ID']
+      config.app_secret = ENV['FACEBOOK_APP_SECRET']
     end
-    def facebook_client
-      Koala.configure do |config|
-        config.access_token = session[:oauth_token]
-        config.app_access_token = session[:oauth_token_secret]
-        config.app_id = ENV['FACEBOOK_APP_ID']
-        config.app_secret = ENV['FACEBOOK_APP_SECRET']
-      end
-      Koala::Facebook::API.new(session[:oauth_token])
-    end
+    Koala::Facebook::API.new(session[:oauth_token])
+  end
+  def set_social_profile_token(provider)
+    session[:other_oauth_token] = {} unless session[:other_oauth_token]
+    session[:other_oauth_token_secret] = {} unless session[:other_oauth_token_secret]
+    session[:other_oauth_token][provider] = current_user.get_social_profile_oauth_token(provider)
+    session[:other_oauth_token_secret][provider] = current_user.get_social_profile_oauth_token_secret(provider)
+  end
 end
