@@ -12,4 +12,4 @@ export SECRET_KEY_BASE=`rake secret`
 rake secret>.secret
 bundle exec rails db:setup
 bundle exec rails db:migrate
-bundle exec rails db:seed
+
