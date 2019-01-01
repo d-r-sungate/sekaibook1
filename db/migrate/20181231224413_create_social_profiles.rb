@@ -7,6 +7,8 @@ class CreateSocialProfiles < ActiveRecord::Migration[5.2]
       t.string :username
       t.string :email
       t.string :image
+      t.string :oauth_token
+      t.string :oauth_token_secret
       t.timestamps
     end
     add_index :social_profiles, [:provider, :uid], unique: true
