@@ -96,7 +96,7 @@ class BooksController < ApplicationController
       end
     end
     def get_articlebooks
-      @articlebooks = Book.where(article_id: params[:id])
+      @articlebooks = Book.where(article_id: params[:id]).joins(:user)
     end
     def book_params
       params.require(:book).permit(:comment)
