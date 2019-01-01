@@ -10,18 +10,10 @@
 <p><%= t 'users.country' %>: <%= country_name(@user.country) %></p>
 <p><%= t 'users.booklikes' %>: <%= @booklikescount %></p>
 <% if @user.provider != 'twitter' && !@user.has_social_profile?('twitter') %>
-<p class="col s6 m4">
-  <%= link_to user_twitter_omniauth_authorize_path, class: "btn btn-social btn-twitter" do %>
-  <span class="fa fa-twitter"></span> Twitterで登録
-  <% end %>
-</p>
+<%= link_to t('users.action_linked_twitter'), user_twitter_omniauth_authorize_path, class: "btn btn-social btn-twitter" %>
 <% end %>
 <% if @user.provider != 'facebook' && !@user.has_social_profile?('facebook')  %>
-<p class="col s12 m4">
-  <%= link_to user_facebook_omniauth_authorize_path, class: "btn btn-social btn-facebook" do %>
-  <span class="fa fa-facebook"></span> Facebookで登録
-  <% end %>
-</p>
+<%= link_to t('users.action_linked_facebook'), user_facebook_omniauth_authorize_path, class: "btn btn-social btn-facebook" %>
 <% end %>
 <% if !@books.nil? %>
   <ul>
