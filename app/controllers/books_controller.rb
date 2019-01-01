@@ -111,9 +111,6 @@ class BooksController < ApplicationController
       access_token        = session[:other_oauth_token]['twitter']
       access_token_secret = session[:other_oauth_token_secret]['twitter']
     end
-    puts "######10####"
-    puts access_token
-    puts access_token_secret
     Twitter::REST::Client.new do |config|
       config.consumer_key        = ENV['TWITTER_CONSUMER_KEY']
       config.consumer_secret     = ENV['TWITTER_CONSUMER_SECRET']
@@ -128,7 +125,7 @@ class BooksController < ApplicationController
       access_token        = session[:other_oauth_token]['facebook']
       access_token_secret = session[:other_oauth_token_secret]['facebook']
     end
-   Koala.configure do |config|
+    Koala.configure do |config|
       config.access_token = access_token
       config.app_access_token = access_token_secret
       config.app_id = ENV['FACEBOOK_APP_ID']
