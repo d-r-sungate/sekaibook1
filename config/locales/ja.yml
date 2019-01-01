@@ -167,6 +167,13 @@ ja:
       success: 追加しました。
       adderror: 追加できませんでした。
       geterror: 取得できませんでした。
+  omniauth_callbacks:
+    twitter:
+      addsuccess: Twitterに追加しました。
+      existserror: すでにTwitterに追加済みです。
+    facebook:
+      addsuccess: Facebookに追加しました。
+      existserror: すでにFacebookに追加済みです。
   title:
     books:
       index: 記事一覧

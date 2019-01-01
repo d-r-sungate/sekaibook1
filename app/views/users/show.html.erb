@@ -6,9 +6,23 @@
 <p><%= t 'users.username' %>: <%= @user.username %></p> <% if current_user && @user.id == current_user.id %><%= link_to '編集', edit_user_path(@user) %> <% end %>
 <p><%= t 'users.oganization' %>: <%= @user.oganization %></p>
 <p><%= t 'users.title' %>: <%= @user.title %></p>
-<p><%= t 'users.introduction' %>: <%= @user.introduction %></p>
+<p><%= t 'users.introduction' %>: <%= simple_format(@user.introduction) %></p>
 <p><%= t 'users.country' %>: <%= country_name(@user.country) %></p>
 <p><%= t 'users.booklikes' %>: <%= @booklikescount %></p>
+<% if @user.provider != 'twitter' && !@user.has_social_profile?('twitter') %>
+<p class="col s6 m4">
+  <%= link_to user_twitter_omniauth_authorize_path, class: "btn btn-social btn-twitter" do %>
+  <span class="fa fa-twitter"></span> Twitterで登録
+  <% end %>
+</p>
+<% end %>
+<% if @user.provider != 'facebook' && !@user.has_social_profile?('facebook')  %>
+<p class="col s12 m4">
+  <%= link_to user_facebook_omniauth_authorize_path, class: "btn btn-social btn-facebook" do %>
+  <span class="fa fa-facebook"></span> Facebookで登録
+  <% end %>
+</p>
+<% end %>
 <% if !@books.nil? %>
   <ul>
   <%  @books.each do |book| %>

@@ -1,10 +1,18 @@
 class OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def facebook
-    callback_from :facebook
+    if anotherprovider?(:facebook)
+      call_addsocial(:facebook)
+    else
+      callback_from :facebook
+    end
   end
 
   def twitter
-    callback_from :twitter
+    if anotherprovider?(:twitter)
+       call_addsocial(:twitter)
+    else
+      callback_from :twitter
+    end
   end
 
   private
@@ -25,6 +33,25 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
       session["devise.#{provider}_data"] = request.env["omniauth.auth"].except("extra")
       redirect_to new_user_registration_url
     end
+  end
     
+  def call_addsocial(provider)
+    auth = request.env['omniauth.auth']
+    profile = SocialProfile.find_for_oauth(current_user.id, auth)
+    if profile.persisted?
+      redirect_to user_path(current_user), notice: t('.addsuccess')
+    elsif profile.errors
+      redirect_to user_path(current_user), notice: profile.errors.messages
+    else
+      redirect_to user_path(current_user), notice: t('.existserror')
+    end
+  end
+
+  def anotherprovider?(provider)
+    if current_user 
+      return User.existsprovider?(current_user.id, provider)
+    else
+      return false
+    end
   end
 end

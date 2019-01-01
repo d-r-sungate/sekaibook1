@@ -31,18 +31,26 @@
     <%= f.label t('users.country') %><br />
     <%= f.country_select :country, priority_countries: ["JP", "US"], priority_countries_divider: "----------" %>
   </div>
-  <% if @user.provider == 'facebook' %>
+  <% if @user.provider == 'facebook' || @user.has_social_profile?('facebook') %>
   <div class="field">
     <%= f.label t('users.auto_post_facebook') %><br />
-    <%= f.text_field :uid, readonly: true, disabled: true %><br/>
-    <%= f.check_box :auto_post_facebook %>
+    <% if @user.provider == 'facebook' %>
+      <%= f.text_field :uid, readonly: true, disabled: true %><br/>
+    <%else %>
+      <%= f.text_field :uid, value:@user.get_social_profile_uid('facebook'), readonly: true, disabled: true %><br/>
+    <% end %>
+     <%= f.check_box :auto_post_facebook %>
 
   </div>
   <% end %>
-  <% if @user.provider == 'twitter' %>
+  <% if @user.provider == 'twitter' || @user.has_social_profile?('twitter') %>
   <div class="field">
     <%= f.label  t('users.auto_post_twitter') %><br />
-    <%= f.text_field :uid, readonly: true, disabled: true %><br/>
+    <% if @user.provider == 'twitter' %>
+      <%= f.text_field :uid, readonly: true, disabled: true %><br/>
+    <%else %>
+      <%= f.text_field :uid, value:@user.get_social_profile_uid('twitter'), readonly: true, disabled: true %><br/>
+    <% end %>
     <%= f.check_box :auto_post_twitter %>
     </div>
   <% end %>
