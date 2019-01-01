@@ -137,12 +137,15 @@ ja:
     introduction: 自己紹介
     country: 居住国
     booklikes: いいね
-    auto_post_facebook: Facebook連携
-    auto_post_twitter: twitter連携
+    linked_facebook: Facebook連携
+    auto_post_facebook: Facebookへ自動投稿する
+    linked_twitter: Twitter連携
+    auto_post_twitter: Twitterへ自動投稿する
     update:
       success: 更新しました。
   books:
     comment: コメント
+    sharefacebookbtn: Facebookへシェア
     bookbtn: Book
     create:
       success: 追加しました。
@@ -167,6 +170,13 @@ ja:
       success: 追加しました。
       adderror: 追加できませんでした。
       geterror: 取得できませんでした。
+  omniauth_callbacks:
+    twitter:
+      addsuccess: Twitterに追加しました。
+      existserror: すでにTwitterに追加済みです。
+    facebook:
+      addsuccess: Facebookに追加しました。
+      existserror: すでにFacebookに追加済みです。
   title:
     books:
       index: 記事一覧

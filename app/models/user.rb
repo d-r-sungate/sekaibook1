@@ -9,6 +9,8 @@ class User < ApplicationRecord
   validates :country,    length: { maximum: 100 }
     
   has_many :like, dependent: :destroy
+  has_many :social_profile, dependent: :destroy
+
 
   def self.find_for_oauth(auth)
     user = User.where(uid: auth.uid, provider: auth.provider).first
@@ -29,7 +31,55 @@ class User < ApplicationRecord
     end
 
     user
+  end
+
+  def self.existsprovider?(user_id, provider)
+     user = User.find(user_id)
+     unless user
+       return false
+     end
+     if user.provider != "" && user.provider == provider
+       return false
+     else
+       return true
+     end
    end
+ 
+  def has_social_profile?(provider)
+    social_profile.each do |profile|
+      if profile.provider == provider
+        return true
+      end
+    end
+    return false
+  end
+
+  def get_social_profile_uid(provider)
+    social_profile.each do |profile|
+      if profile.provider == provider
+        return profile.uid
+      end
+    end
+    return nil
+  end
+  
+  def get_social_profile_oauth_token(provider)
+    social_profile.each do |profile|
+      if profile.provider == provider
+        return profile.oauth_token
+      end
+    end
+    return nil
+  end
+
+  def get_social_profile_oauth_token_secret(provider)
+    social_profile.each do |profile|
+      if profile.provider == provider
+        return profile.oauth_token_secret
+      end
+    end
+    return nil
+  end
 
   private
 
