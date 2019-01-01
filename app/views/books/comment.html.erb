@@ -10,3 +10,27 @@
 <p><%= t 'articles.area' %>: <%= @article.area.description %></p>
 
 <%= render 'form_comment', book: @book %>
+
+<% if current_user.provider == 'facebook' || current_user.has_social_profile?('facebook') %>
+
+
+<!--Facebook Share button-->
+<div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = 'https://connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v3.1&appId=<%= ENV['FACEBOOK_APP_ID'] %>&autoLogAppEvents=1';
+  fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+<div  class="fb-share-button" data-href="<%= @article.url %>" data-layout="button_count" data-size="large" data-mobile-iframe="true">
+  <a target="_blank"
+    class="share_btn2 shfb" 
+    href="https://www.facebook.com/sharer/sharer.php?u=<%= @article.url %>&amp;src=sdkpreparse" 
+    class="fb-xfbml-parse-ignore">
+    <i class="fab fa-facebook-square"><%= t 'books.sharefacebookbtn' %></i>
+  </a>
+</div>
+<% end %>
