@@ -31,7 +31,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
   def get_books
-    @books = Book.where(user_id: params[:id]).joins(:article).page(params[:page]).per(Settings.users.books.pagerow)
+    @books = Book.where(user_id: params[:id]).joins(:article).order('articles.date  desc').page(params[:page]).per(Settings.users.books.pagerow)
   end
   def set_booklikescount
     booklikes = Book.select('sum(likes_count) as sum').where(user_id: params[:id]).group(:user_id)

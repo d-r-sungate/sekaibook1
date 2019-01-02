@@ -85,7 +85,7 @@ class BooksController < ApplicationController
   
   private
   def get_allarticles
-    @articles = Article.page(params[:page]).per(Settings.books.pagerow)
+    @articles = Article.order('date desc').page(params[:page]).per(Settings.books.pagerow)
   end
   def set_article
     @article = Article.find_by!(id: params[:id])
@@ -97,7 +97,7 @@ class BooksController < ApplicationController
     end
   end
   def get_articlebooks
-    @articlebooks = Book.where(article_id: params[:id]).joins(:user)
+    @articlebooks = Book.where(article_id: params[:id]).joins(:user).order('books.updated_at desc')
   end
   def get_articlebookscount
     @articlebookscount = Book.where(article_id: params[:id]).joins(:user).count
