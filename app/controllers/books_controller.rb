@@ -1,7 +1,7 @@
 class BooksController < ApplicationController
   before_action :authenticate_user!, only: [:comment, :create, :update]
   before_action :get_allarticles, only: [:index]
-  before_action :set_article, only: [:comment, :show]
+  before_action :set_article, only: [:comment, :show, :create, :update]
   before_action :get_articlebooks, only: [:show]
   before_action :get_articlebookscount, only: [:show]
   before_action :set_or_create_book, only: [:comment, :create, :update]
@@ -40,7 +40,7 @@ class BooksController < ApplicationController
       end
       redirect_to books_show_url(@book.article_id), notice: flashmesg
     else
-      redirect_to books_comment_url(@book.article_id), notice: t('.error')
+      render :comment
     end
   end
 
@@ -72,8 +72,8 @@ class BooksController < ApplicationController
       end
       redirect_to books_show_url(@book.article_id), notice: flashmesg
     else
-      redirect_to books_comment_url(@book.article_id), notice: t('.error')
-    end
+      render :comment
+     end
   end
 
   def add
@@ -85,7 +85,7 @@ class BooksController < ApplicationController
   
   private
   def get_allarticles
-    @articles = Article.page(params[:page]).per(Settings.books.pagerow)
+    @articles = Article.order('date desc').page(params[:page]).per(Settings.books.pagerow)
   end
   def set_article
     @article = Article.find_by!(id: params[:id])
@@ -97,7 +97,7 @@ class BooksController < ApplicationController
     end
   end
   def get_articlebooks
-    @articlebooks = Book.where(article_id: params[:id]).joins(:user)
+    @articlebooks = Book.where(article_id: params[:id]).joins(:user).order('books.updated_at desc')
   end
   def get_articlebookscount
     @articlebookscount = Book.where(article_id: params[:id]).joins(:user).count

@@ -1,6 +1,7 @@
 class Article < ApplicationRecord
   belongs_to :area
   belongs_to :category
+  validates :url,    length: { maximum: 191 }
   def self.create_article(page, param, current_user)
     article = Article.find_or_initialize_by(url: param['url'])
     if article.new_record?
