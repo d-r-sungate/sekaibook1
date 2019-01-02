@@ -15,7 +15,7 @@ class Article < ApplicationRecord
       end
       article = Article.create(
         url:      param['url'],
-        title:    page.title,
+        title:    page.best_title,
         domain:    page.host,
         description: page.description,
         name:     site_name,
