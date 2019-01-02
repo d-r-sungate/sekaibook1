@@ -168,6 +168,7 @@ ja:
     date: 日付
     description: 記事本文
     like: Like
+    articlebookscount: Book
     create:
       success: 追加しました。
       adderror: 追加できませんでした。
