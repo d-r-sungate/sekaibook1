@@ -1,4 +1,14 @@
 <%= form_for(@book, url: books_comment_url(@book.article_id)) do |f| %>
+  <% if @book.errors.any? %>
+    <div class="alert alert-danger">
+      <h4><%= t('errorexistsmsg') %></h4>
+      <ul class="list-unstyled">
+      <% @book.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
   <div class="field">
     <%= f.label t('books.comment') %><br />
     <%= f.text_area :comment %>

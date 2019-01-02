@@ -1,7 +1,7 @@
 class BooksController < ApplicationController
   before_action :authenticate_user!, only: [:comment, :create, :update]
   before_action :get_allarticles, only: [:index]
-  before_action :set_article, only: [:comment, :show]
+  before_action :set_article, only: [:comment, :show, :create, :update]
   before_action :get_articlebooks, only: [:show]
   before_action :get_articlebookscount, only: [:show]
   before_action :set_or_create_book, only: [:comment, :create, :update]
@@ -40,7 +40,7 @@ class BooksController < ApplicationController
       end
       redirect_to books_show_url(@book.article_id), notice: flashmesg
     else
-      redirect_to books_comment_url(@book.article_id), notice: t('.error')
+      render :comment
     end
   end
 
@@ -72,8 +72,8 @@ class BooksController < ApplicationController
       end
       redirect_to books_show_url(@book.article_id), notice: flashmesg
     else
-      redirect_to books_comment_url(@book.article_id), notice: t('.error')
-    end
+      render :comment
+     end
   end
 
   def add
