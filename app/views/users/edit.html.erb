@@ -64,8 +64,8 @@
 <hr/><%= link_to t('users.action_linked_facebook'), user_facebook_omniauth_authorize_path, class: "btn btn-social btn-facebook" %>
 <% end %>
 <hr/>
-<%= f.submit "Update" %>
+<%= f.submit "Update", class: 'btn btn-primary' %><%= link_to "Back", :back, class: 'btn btn-light' %>
 </div>
 <% end %>
 
-<%= link_to "Back", :back %>
+
