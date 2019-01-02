@@ -39,11 +39,11 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
     auth = request.env['omniauth.auth']
     profile = SocialProfile.find_for_oauth(current_user.id, auth)
     if profile.persisted?
-      redirect_to user_path(current_user), notice: t('.addsuccess')
+      redirect_to edit_user_path(current_user), notice: t('.addsuccess')
     elsif profile.errors
-      redirect_to user_path(current_user), notice: profile.errors.messages
+      redirect_to edit_user_path(current_user), notice: profile.errors.messages
     else
-      redirect_to user_path(current_user), notice: t('.existserror')
+      redirect_to edit_user_path(current_user), notice: t('.existserror')
     end
   end
 

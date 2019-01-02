@@ -6,7 +6,7 @@
     <%= link_to(books_show_path(article.id)) do %>
       <%= article.title %>
       <% if !article.ogpimg.nil? %>
-        <%= image_tag(article.ogpimg.sub(/(http:|https:)/, '')) %>
+        <%= image_tag(article.ogpimg.sub(/(http:|https:)/, ''), :width => '150px' ) %>
       <% else %>
       <% end %>
       <br/>
@@ -15,7 +15,7 @@
       <%= article.category.description %>
       <%= article.area.description %>
     <% end %>
-    <% if current_user %><%= link_to t('books.bookbtn'), books_comment_path(article.id), class: 'btn btn-default' %><% end %>
+    <% if current_user %><%= link_to t('books.bookbtn'), books_comment_path(article.id), class: 'btn btn-info' %><% end %>
     </li>
     <% end %>
     </ul>

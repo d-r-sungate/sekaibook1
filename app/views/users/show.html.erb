@@ -3,18 +3,12 @@
   <p><%= flash[:notice] %></p>
 <% end %>
 <p><%= image_tag @user.image.sub(/(http:|https:)/, '') %></p>
-<p><%= t 'users.username' %>: <%= @user.username %></p> <% if current_user && @user.id == current_user.id %><%= link_to '編集', edit_user_path(@user) %> <% end %>
+<p><%= t 'users.username' %>: <%= @user.username %></p> <% if current_user && @user.id == current_user.id %><%= link_to '編集', edit_user_path(@user), class: 'btn btn-info' %> <% end %>
 <p><%= t 'users.oganization' %>: <%= @user.oganization %></p>
 <p><%= t 'users.title' %>: <%= @user.title %></p>
 <p><%= t 'users.introduction' %>: <%= simple_format(@user.introduction) %></p>
 <p><%= t 'users.country' %>: <%= country_name(@user.country) %></p>
 <p><%= t 'users.booklikes' %>: <%= @booklikescount %></p>
-<% if @user.provider != 'twitter' && !@user.has_social_profile?('twitter') %>
-<%= link_to t('users.action_linked_twitter'), user_twitter_omniauth_authorize_path, class: "btn btn-social btn-twitter" %>
-<% end %>
-<% if @user.provider != 'facebook' && !@user.has_social_profile?('facebook')  %>
-<%= link_to t('users.action_linked_facebook'), user_facebook_omniauth_authorize_path, class: "btn btn-social btn-facebook" %>
-<% end %>
 <% if !@books.nil? %>
   <ul>
   <%  @books.each do |book| %>
@@ -31,7 +25,7 @@
       <%= book.article.category.description %>
       <%= book.article.area.description %>
     <% end %>
-    <% if current_user %><%= link_to t('books.bookbtn'), books_comment_path(book.article_id), class: 'btn btn-default' %><% end %>
+    <% if current_user %><%= link_to t('books.bookbtn'), books_comment_path(book.article_id), class: 'btn btn-info' %><% end %>
     </li>
   <% end %>
   </ul>

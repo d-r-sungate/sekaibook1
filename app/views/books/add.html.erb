@@ -16,5 +16,5 @@
   <%= f.collection_radio_buttons(:category_id,Category.all,:id,:description) %>
 
   </div>
-  <%= f.submit "Book" %>
+  <%= f.submit "Book", class: 'btn btn-primary' %>
 <% end %>

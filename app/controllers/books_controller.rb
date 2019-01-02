@@ -3,6 +3,7 @@ class BooksController < ApplicationController
   before_action :get_allarticles, only: [:index]
   before_action :set_article, only: [:comment, :show]
   before_action :get_articlebooks, only: [:show]
+  before_action :get_articlebookscount, only: [:show]
   before_action :set_or_create_book, only: [:comment, :create, :update]
 
   def index
@@ -97,6 +98,9 @@ class BooksController < ApplicationController
   end
   def get_articlebooks
     @articlebooks = Book.where(article_id: params[:id]).joins(:user)
+  end
+  def get_articlebookscount
+    @articlebookscount = Book.where(article_id: params[:id]).joins(:user).count
   end
   def book_params
     params.require(:book).permit(:comment)

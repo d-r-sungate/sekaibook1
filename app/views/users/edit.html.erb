@@ -57,9 +57,15 @@
     </div>
   <% end %>
 
-    <%= f.submit "Update" %>
-  </div>
+<% if @user.provider != 'twitter' && !@user.has_social_profile?('twitter') %>
+<hr/><%= link_to t('users.action_linked_twitter'), user_twitter_omniauth_authorize_path, class: "btn btn-social btn-twitter" %>
+<% end %>
+<% if @user.provider != 'facebook' && !@user.has_social_profile?('facebook')  %>
+<hr/><%= link_to t('users.action_linked_facebook'), user_facebook_omniauth_authorize_path, class: "btn btn-social btn-facebook" %>
+<% end %>
+<hr/>
+<%= f.submit "Update", class: 'btn btn-primary' %><%= link_to "Back", :back, class: 'btn btn-light' %>
+</div>
 <% end %>
 
 
-<%= link_to "Back", :back %>
