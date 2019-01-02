@@ -8,7 +8,9 @@
 <p><%= t 'articles.description' %>: <%= @article.description %></p>
 <p><%= t 'articles.category' %>: <%= @article.category.description %></p>
 <p><%= t 'articles.area' %>: <%= @article.area.description %></p>
-<% if current_user %><%= link_to t('books.bookbtn'), books_comment_path(@article.id), class: 'btn btn-default' %><% end %>
+<p><%= @articlebookscount %> <%= t 'articles.articlebookscount' %>
+<% if current_user %><%= link_to t('books.bookbtn'), books_comment_path(@article.id), class: 'btn btn-info' %><% end %>
+</p>
 <% if !@articlebooks.nil? %>
 <ul>
   <%  @articlebooks.each do |articlebook| %>
