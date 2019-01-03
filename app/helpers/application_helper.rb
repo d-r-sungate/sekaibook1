@@ -9,4 +9,7 @@ module ApplicationHelper
       country.translations[I18n.locale.to_s] || country.name
     end
   end
+def site_name(name)
+  name.gsub(/(\["|"\])/, '')
+end
 end
